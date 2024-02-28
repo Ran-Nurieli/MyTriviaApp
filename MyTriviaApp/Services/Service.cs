@@ -19,14 +19,12 @@ namespace MyTriviaApp.Services
        
         public Service()
         {
-           this.players=new List<Player>();
+            this.players=new List<Player>();
             this.question = new List<Question>();
             this.ranks = new List<Rank>();
             this.status = new List<Status>();
             this.subject = new List<Subject>();
             FillList();
-            
-
         }
 
         private void FillList()
@@ -48,6 +46,8 @@ namespace MyTriviaApp.Services
             //}
             //return false;
         }
+
+        
 
     }
 }
