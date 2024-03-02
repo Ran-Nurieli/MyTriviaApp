@@ -6,7 +6,15 @@
    xmlns:vm="clr-namespace:MyTriviaApp.ViewModels"
     x:DataType="vm:LoginPageViewModel"
     Title="Login">
+
     <VerticalStackLayout Margin="20">
+
+        
+       
+
+
+        
+
         <Label
             FontSize="Large"
             HorizontalOptions="Center"
