@@ -29,66 +29,26 @@
         </HorizontalStackLayout>
         <ScrollView MaximumHeightRequest="200">
 
-            <StackLayout>
+            <StackLayout x:Name="UsersStackLayout">
                 
-                <SwipeView>
-                    <SwipeView.LeftItems>
-                        <SwipeItem Text="Delete" BackgroundColor="Red"/>
-                        <SwipeItem Text="ResetPoints" BackgroundColor="Green"/>
-                    </SwipeView.LeftItems>
-                    <Grid BackgroundColor="LightGray" HeightRequest="60" WidthRequest="300">
-                        <Label Text="Username" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Grid>
-                </SwipeView>        
-                <SwipeView>
-                    <SwipeView.LeftItems>
-                        <SwipeItem Text="Delete" BackgroundColor="Red"/>
-                        <SwipeItem Text="ResetPoints" BackgroundColor="Green"/>
-                    </SwipeView.LeftItems>
-                    <Grid BackgroundColor="LightGray" HeightRequest="60" WidthRequest="300">
-                        <Label Text="Username" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Grid>
-                </SwipeView>     
-                <SwipeView>
-                    <SwipeView.LeftItems>
-                        <SwipeItem Text="Delete" BackgroundColor="Red"/>
-                        <SwipeItem Text="ResetPoints" BackgroundColor="Green"/>
-                    </SwipeView.LeftItems>
-                    <Grid BackgroundColor="LightGray" HeightRequest="60" WidthRequest="300">
-                        <Label Text="Username" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Grid>
-                </SwipeView>
-                <SwipeView>
-                    <SwipeView.LeftItems>
-                        <SwipeItem Text="Delete" BackgroundColor="Red"/>
-                        <SwipeItem Text="ResetPoints" BackgroundColor="Green"/>
-                    </SwipeView.LeftItems>
-                    <Grid BackgroundColor="LightGray" HeightRequest="60" WidthRequest="300">
-                        <Label Text="Username" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Grid>
-                </SwipeView>
-                <SwipeView>
-                    <SwipeView.LeftItems>
-                        <SwipeItem Text="Delete" BackgroundColor="Red"/>
-                        <SwipeItem Text="ResetPoints" BackgroundColor="Green"/>
-                    </SwipeView.LeftItems>
-                    <Grid BackgroundColor="LightGray" HeightRequest="60" WidthRequest="300">
-                        <Label Text="Username" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Grid>
-                </SwipeView>           
-                <SwipeView>
-                    <SwipeView.LeftItems>
-                        <SwipeItem Text="Delete" BackgroundColor="Red"/>
-                        <SwipeItem Text="ResetPoints" BackgroundColor="Green"/>
-                    </SwipeView.LeftItems>
-                    <Grid BackgroundColor="LightGray" HeightRequest="60" WidthRequest="300">
-                        <Label Text="Username" HorizontalOptions="Center" VerticalOptions="Center"/>
-                    </Grid>
-                </SwipeView>
+
 
             </StackLayout>
 
         </ScrollView>
+        <HorizontalStackLayout HorizontalOptions="Center">
+
+            <Button Command="{Binding LoginCommand}" Text="Add Player" BackgroundColor="Blue"/>
+            <Grid>
+                <Entry Text="Username" WidthRequest="200" HorizontalTextAlignment="Center"/>
+            </Grid>
+            <Grid>
+                <Entry Text="Mail" WidthRequest="200" HorizontalTextAlignment="Center"/>
+            </Grid>
+            <Grid>
+                <Entry Text="Password" WidthRequest="200" HorizontalTextAlignment="Center"/>
+            </Grid>
+        </HorizontalStackLayout>
 
 
 
