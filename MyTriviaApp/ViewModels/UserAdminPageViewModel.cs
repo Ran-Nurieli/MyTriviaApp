@@ -1,4 +1,6 @@
-﻿using MyTriviaApp.Models;
+﻿using Android.App;
+using MyTriviaApp.Models;
+using MyTriviaApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +12,7 @@ namespace MyTriviaApp.ViewModels
 {
     internal class UserAdminPageViewModel
     {
-
+        
 
         public ICommand RefreshStudentsCommand { get; private set; }
         public ICommand AddStudentCommand { get; private set; }

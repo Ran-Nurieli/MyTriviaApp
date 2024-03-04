@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyTriviaApp.Views.UserAdminPage"
-             Title="UserAdminPage">
-    <VerticalStackLayout >
-        
-        <Label Text="User Management" FontSize="Large" HorizontalOptions="Center" />
+<ContentPage
+    x:Class="MyTriviaApp.Views.UserAdminPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="UserAdminPage">
+    <VerticalStackLayout>
+
+        <Label
+            FontSize="Large"
+            HorizontalOptions="Center"
+            Text="User Management" />
         <HorizontalStackLayout HorizontalOptions="Center">
-            
-            <Picker >
+
+            <Picker>
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>
-                            Rookie 
+                            Rookie
                         </x:String>
                         <x:String>
                             Master
@@ -20,33 +24,47 @@
                         <x:String>
                             Admin
                         </x:String>
+                        <x:String>
+                            All
+                        </x:String>
                     </x:Array>
 
                 </Picker.ItemsSource>
             </Picker>
-                <Button Command="{Binding }" Text="Filter"/>
-            <Button Command="{Binding ResetPointsCommand}" Text="Reset" BackgroundColor="Red"/>
+            <Button Command="{Binding}" Text="Filter" />
+            <Button
+                BackgroundColor="Red"
+                Command="{Binding ResetPointsCommand}"
+                Text="Reset" />
         </HorizontalStackLayout>
         <ScrollView MaximumHeightRequest="200">
 
-            <StackLayout x:Name="UsersStackLayout">
-                
-
-
-            </StackLayout>
+            <StackLayout x:Name="UsersStackLayout" />
 
         </ScrollView>
         <HorizontalStackLayout HorizontalOptions="Center">
 
-            <Button Command="{Binding AddPlayerCommand}" Text="Add Player" BackgroundColor="Blue"/>
+            <Button
+                BackgroundColor="Blue"
+                Command="{Binding AddPlayerCommand}"
+                Text="Add Player" />
             <Grid>
-                <Entry Text="Username" WidthRequest="200" HorizontalTextAlignment="Center"/>
+                <Entry
+                    HorizontalTextAlignment="Center"
+                    Text="Username"
+                    WidthRequest="200" />
             </Grid>
             <Grid>
-                <Entry Text="Mail" WidthRequest="200" HorizontalTextAlignment="Center"/>
+                <Entry
+                    HorizontalTextAlignment="Center"
+                    Text="Mail"
+                    WidthRequest="200" />
             </Grid>
             <Grid>
-                <Entry Text="Password" WidthRequest="200" HorizontalTextAlignment="Center"/>
+                <Entry
+                    HorizontalTextAlignment="Center"
+                    Text="Password"
+                    WidthRequest="200" />
             </Grid>
         </HorizontalStackLayout>
 
