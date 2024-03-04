@@ -24,8 +24,8 @@
 
                 </Picker.ItemsSource>
             </Picker>
-                <Button Command="{Binding LoginCommand}" Text="Filter"/>
-            <Button Command="{Binding LoginCommand}" Text="Reset" BackgroundColor="Red"/>
+                <Button Command="{Binding }" Text="Filter"/>
+            <Button Command="{Binding ResetPointsCommand}" Text="Reset" BackgroundColor="Red"/>
         </HorizontalStackLayout>
         <ScrollView MaximumHeightRequest="200">
 
@@ -38,7 +38,7 @@
         </ScrollView>
         <HorizontalStackLayout HorizontalOptions="Center">
 
-            <Button Command="{Binding LoginCommand}" Text="Add Player" BackgroundColor="Blue"/>
+            <Button Command="{Binding AddPlayerCommand}" Text="Add Player" BackgroundColor="Blue"/>
             <Grid>
                 <Entry Text="Username" WidthRequest="200" HorizontalTextAlignment="Center"/>
             </Grid>
