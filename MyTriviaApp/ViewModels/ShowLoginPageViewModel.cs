@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MyTriviaApp.ViewModels
 {
-    internal class ShowLoginPageViewModel:ViewModel
+    internal class ShowLoginPageViewModel:ViewModelBase
     {
 
     }

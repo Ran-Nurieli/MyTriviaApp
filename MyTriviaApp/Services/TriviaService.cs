@@ -9,17 +9,18 @@ using MyTriviaApp.Models;
 
 namespace MyTriviaApp.Services
 {
-    public class Service
+    public class TriviaService
     {
-       List<Player> players ;
-        List<Question> questions ;
-        List<Rank> ranks;
-        List<Status> statuses ;
-        List<Subject> subjects ;
+       private List<Player> players { get; set; }
        
-        public Service()
+       private List<Question> questions { get; set; }
+       private List<Rank> ranks { get; set; }
+       private List<Status> statuses { get; set; }
+       private List<Subject> subjects { get; set; }
+
+        public TriviaService()
         {
-           this.players=new List<Player>();
+            this.players=new List<Player>();
             this.questions = new List<Question>();
             this.ranks = new List<Rank>();
             this.statuses = new List<Status>();
@@ -29,14 +30,19 @@ namespace MyTriviaApp.Services
             FillStatus();
             FillPlayers();
             
+            
 
+        }
+        public List<Player>GetPlayers()
+        {
+            return players;
         }
 
         private void FillRank()
         {
             ranks.Add(new Rank() {RankId=0,RankName="Admin"});
-            ranks.Add(new Rank() { RankId = 0, RankName = "Master" });
-            ranks.Add(new Rank() { RankId = 0, RankName = "Rookie" });
+            ranks.Add(new Rank() { RankId = 1, RankName = "Master" });
+            ranks.Add(new Rank() { RankId = 2, RankName = "Rookie" });
         }
         private void FillSubject()
         {
@@ -53,6 +59,7 @@ namespace MyTriviaApp.Services
         private void FillPlayers()
         {
             players.Add(new Player { Mail="Ben.Sha@gmail.com", Name = "Ben", RankId = ranks[0].GetRankId(0), Points = 0, Password = "123", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
             
             //להוסיף עוד שחקן
         }

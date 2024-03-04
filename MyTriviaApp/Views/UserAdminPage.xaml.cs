@@ -1,4 +1,6 @@
 namespace MyTriviaApp.Views;
+
+using MyTriviaApp.Services;
 using MyTriviaApp.ViewModels;
 using static System.Net.Mime.MediaTypeNames;
 
@@ -7,13 +9,16 @@ public partial class UserAdminPage : ContentPage
 	public UserAdminPage()
 	{
 		InitializeComponent();
-        //Invoke ViewModel Function GetAllUsers
+        TriviaService service = new TriviaService();
+        UserAdminPageViewModel vm = new UserAdminPageViewModel(service);
+        this.BindingContext = vm;
 
-        //Create With For loop all the SwipeViews
-        for(int i = 0;i < 7; i++)
+        List<string> players = vm.GetAllPlayers();
+        foreach(string player in players)
         {
-            UsersStackLayout.Children.Add(CreateSwipeView("Username"));
+            UsersStackLayout.Children.Add(CreateSwipeView(player));
         }
+
         
 
 

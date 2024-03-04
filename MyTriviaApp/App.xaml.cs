@@ -9,6 +9,9 @@ namespace MyTriviaApp
         {
             InitializeComponent();
 
+       
+
+
             MainPage = new UserAdminPage();
         }
     }
