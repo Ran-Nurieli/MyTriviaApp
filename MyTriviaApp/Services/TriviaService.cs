@@ -37,7 +37,10 @@ namespace MyTriviaApp.Services
         {
             return players;
         }
-
+        public List<Rank> GetRanks()
+        {
+            return ranks;
+        }
         private void FillRank()
         {
             ranks.Add(new Rank() {RankId=0,RankName="Admin"});
@@ -59,6 +62,11 @@ namespace MyTriviaApp.Services
         private void FillPlayers()
         {
             players.Add(new Player { Mail="Ben.Sha@gmail.com", Name = "Ben", RankId = ranks[0].GetRankId(0), Points = 0, Password = "123", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
             
             //להוסיף עוד שחקן

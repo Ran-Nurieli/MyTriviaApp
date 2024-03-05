@@ -12,7 +12,7 @@
             Text="User Management" />
         <HorizontalStackLayout HorizontalOptions="Center">
 
-            <Picker>
+            <Picker Title="pick">
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>
