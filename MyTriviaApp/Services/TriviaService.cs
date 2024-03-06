@@ -33,7 +33,7 @@ namespace MyTriviaApp.Services
             
 
         }
-        public List<Player>GetPlayers()
+        public List<Player> GetPlayers1()
         {
             return players;
         }
@@ -87,7 +87,21 @@ namespace MyTriviaApp.Services
             //return false;
         }
 
-        
+        public async Task<List<Player>> GetPlayers()
+        {
+            await Task.Delay(1000);
+            return players.ToList();
+        }
+        public async Task RemovePlayer(Player player)
+        {
+            await Task.Delay(2000);
+            var p = players.Where(x => x.Name == player.Name).FirstOrDefault();
+            if (p != null)
+            {
+                players.Remove(p);
+            }
+        }
+
 
     }
 }

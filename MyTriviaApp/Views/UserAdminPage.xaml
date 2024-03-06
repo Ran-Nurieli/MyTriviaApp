@@ -52,19 +52,19 @@
                 <Entry
                     HorizontalTextAlignment="Center"
                     Text="Username"
-                    WidthRequest="200" />
+                    WidthRequest="100" />
             </Grid>
             <Grid>
                 <Entry
                     HorizontalTextAlignment="Center"
                     Text="Mail"
-                    WidthRequest="200" />
+                    WidthRequest="100" />
             </Grid>
             <Grid>
                 <Entry
                     HorizontalTextAlignment="Center"
                     Text="Password"
-                    WidthRequest="200" />
+                    WidthRequest="100" />
             </Grid>
         </HorizontalStackLayout>
 
