@@ -10,6 +10,12 @@
             FontSize="Large"
             HorizontalOptions="Center"
             Text="User Management" />
+        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+            <CollectionView x:Name="colView" >
+
+            </CollectionView>
+        </RefreshView>
+
         <HorizontalStackLayout HorizontalOptions="Center">
             <Picker Title="pick">
                 <Picker.ItemsSource>
@@ -30,7 +36,7 @@
 
                 </Picker.ItemsSource>
             </Picker>
-            <Button Command="{Binding}" Text="Filter" />
+            <Button Command="{Binding FilterCommand}" Text="Filter" />
             <Button
                 BackgroundColor="Red"
                 Command="{Binding ResetPointsCommand}"

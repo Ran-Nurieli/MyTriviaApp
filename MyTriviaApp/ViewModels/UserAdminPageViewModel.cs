@@ -1,4 +1,5 @@
 ﻿
+using Android.Widget;
 using MyTriviaApp.Models;
 using MyTriviaApp.Services;
 using System;
@@ -15,10 +16,12 @@ namespace MyTriviaApp.ViewModels
     {
         TriviaService triviaService;
 
-
+        private TriviaService service;
         private List<Player> fullList;
         private Player selectedPlayer;
         private Rank selectedRank;
+        public Rank SelectedRank { get => selectedRank; set { selectedRank = value; OnPropertyChanged(); } }
+        public List<Rank> Ranks;
         public Player SelectedPlayer { get => selectedPlayer; set { selectedPlayer = value;OnPropertyChanged(); } }
         public ICommand ClearPlayersCommand { get; private set; }
         public ICommand LoadPlayersCommand { get; private set; }
@@ -28,8 +31,7 @@ namespace MyTriviaApp.ViewModels
         public ICommand RefreshCommand { get; private set; }
         public ICommand FilterCommand { get; private set; }
         public ICommand ClearFilterCommand { get; private set; }
-        public Rank SelectedRank { get => selectedRank; set { selectedRank = value; OnPropertyChanged(); } }
-
+      
         public ObservableCollection<Player> Players { get; set; }
        
 
@@ -38,12 +40,18 @@ namespace MyTriviaApp.ViewModels
 
         public UserAdminPageViewModel(TriviaService triviaService)
         {
+
+            service = triviaService;
+            IsRefreshing = false ;
+            
             this.triviaService = triviaService;
             Players = new ObservableCollection<Player>();//רשימה ריקה
             fullList = new List<Player>();
 
             RemovePlayerCommand = new Command(async (object obj) => { Player p = (Player)obj; Players.Remove(p); fullList.Remove(p); await triviaService.RemovePlayer(p); });//מחיקת התלמיד מהרשימה
             LoadPlayersCommand = new Command(async () => await LoadPlayers());
+            
+            
             FilterCommand = new Command(() =>
             {
                 try
@@ -52,13 +60,15 @@ namespace MyTriviaApp.ViewModels
 
                     Players.Clear();
 
-                    foreach (var student in FilterByRanks)
-                        Players.Add(student);
+                    foreach (var player in FilterByRanks)
+                        Players.Add(player);
                 }
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
 
             }, () => fullList != null && fullList.Count > 0);
             ClearFilterCommand = new Command(async () => { await LoadPlayers(); }, () => fullList != null && fullList.Count > 0);
+
+            
         }
 
         private async Task LoadPlayers()
