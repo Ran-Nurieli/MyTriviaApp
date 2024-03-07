@@ -3,6 +3,8 @@
     x:Class="MyTriviaApp.Views.UserAdminPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MyTriviaApp.Models"
+    xmlns:vm="clr-namespace:MyTriviaApp.ViewModels"
     Title="UserAdminPage">
     <VerticalStackLayout>
 
@@ -17,7 +19,7 @@
         </RefreshView>
 
         <HorizontalStackLayout HorizontalOptions="Center">
-            <Picker Title="pick">
+            <Picker >
                 <Picker.ItemsSource>
                     <x:Array Type="{x:Type x:String}">
                         <x:String>
@@ -39,12 +41,67 @@
             <Button Command="{Binding FilterCommand}" Text="Filter" />
             <Button
                 BackgroundColor="Red"
-                Command="{Binding ResetPointsCommand}"
+                Command="{Binding ClearPointsCommand}"
                 Text="Reset" />
         </HorizontalStackLayout>
         <ScrollView MaximumHeightRequest="200">
 
-            <StackLayout x:Name="UsersStackLayout" />
+            <StackLayout x:Name="UsersStackLayout">
+                <CollectionView
+                    x:Name="colview"
+                    Grid.Row="2"
+                    ItemsSource="{Binding Players}">
+                    <!--  עיצוב הפריסה של הפריטים  -->
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <!--  תצוגה כשאין פריטים  -->
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout
+                            Margin="10"
+                            Padding="5"
+                            BackgroundColor="LightBlue"
+                            HeightRequest="200"
+                            VerticalOptions="Start">
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+                    <!--  עיצוב תצוגה של פריט בודד  -->
+                    <CollectionView.ItemTemplate>
+                        <!--  x:DataType מגדיר מאיפה להשלים את הנתונים  -->
+                        <DataTemplate x:DataType="models:Player">
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItem Text="Delete" BackgroundColor="Red" Command="{Binding DeletePlayerCommand}"/>
+                                    <SwipeItem Text="Reset Points" BackgroundColor="Green" Command="{Binding ResetPointsCommand}"/>
+                                </SwipeView.LeftItems>
+                                <Grid Padding="10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Text="{Binding Name}" 
+                               Grid.Row="0" Grid.Column="0"
+                               FontSize="18" FontAttributes="Bold" />
+                                    <Label Text="{Binding Mail}" 
+                               Grid.Row="0" Grid.Column="1"
+                               FontSize="14" TextColor="Gray" />
+                                    <Label Text="{Binding Rank.RankName}" 
+                               Grid.Row="1" Grid.Column="0"
+                               FontSize="16" FontAttributes="Bold" />
+                                    <Label Text="{Binding Points}" 
+                               Grid.Row="1" Grid.Column="1"
+                               FontSize="16" FontAttributes="Bold" />
+                                </Grid>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </StackLayout>
 
         </ScrollView>
         <HorizontalStackLayout HorizontalOptions="Center">

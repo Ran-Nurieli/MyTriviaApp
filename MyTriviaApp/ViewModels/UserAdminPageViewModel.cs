@@ -1,5 +1,5 @@
 ﻿
-using Android.Widget;
+
 using MyTriviaApp.Models;
 using MyTriviaApp.Services;
 using System;
@@ -14,44 +14,43 @@ namespace MyTriviaApp.ViewModels
 {
     internal class UserAdminPageViewModel:ViewModelBase
     {
-        TriviaService triviaService;
 
         private TriviaService service;
         private List<Player> fullList;
         private Player selectedPlayer;
         private Rank selectedRank;
-        public Rank SelectedRank { get => selectedRank; set { selectedRank = value; OnPropertyChanged(); } }
         public List<Rank> Ranks;
+        private bool isRefreshing;
+        public ObservableCollection<Player> Players { get; set; }
+        public bool IsRefreshing { get => isRefreshing; set { isRefreshing = value; OnPropertyChanged(); } }
+        public Rank SelectedRank { get => selectedRank; set { selectedRank = value; OnPropertyChanged(); } }
         public Player SelectedPlayer { get => selectedPlayer; set { selectedPlayer = value;OnPropertyChanged(); } }
+
         public ICommand ClearPlayersCommand { get; private set; }
         public ICommand LoadPlayersCommand { get; private set; }
-        public ICommand AddPlayerCommand { get; private set; }
+      //  public ICommand AddPlayerCommand { get; private set; }
         public ICommand RemovePlayerCommand { get; private set; }
-        public ICommand ResetPointsCommand { get; private set; }
-        public ICommand RefreshCommand { get; private set; }
+      //  public ICommand ResetPointsCommand { get; private set; }
+        //public ICommand RefreshCommand { get; private set; }
         public ICommand FilterCommand { get; private set; }
         public ICommand ClearFilterCommand { get; private set; }
-      
-        public ObservableCollection<Player> Players { get; set; }
-       
 
-        private bool isRefreshing;
-        public bool IsRefreshing { get => isRefreshing; set { isRefreshing = value; OnPropertyChanged(); } }
 
-        public UserAdminPageViewModel(TriviaService triviaService)
+        public UserAdminPageViewModel(TriviaService service)
         {
-
-            service = triviaService;
-            IsRefreshing = false ;
-            
-            this.triviaService = triviaService;
-            Players = new ObservableCollection<Player>();//רשימה ריקה
+            this.service = service;
             fullList = new List<Player>();
+            IsRefreshing = false;
+            SelectedRank = null;
+            SelectedPlayer = null;
+            Players = new ObservableCollection<Player>();
 
-            RemovePlayerCommand = new Command(async (object obj) => { Player p = (Player)obj; Players.Remove(p); fullList.Remove(p); await triviaService.RemovePlayer(p); });//מחיקת התלמיד מהרשימה
+
+            RemovePlayerCommand = new Command(async (object obj) => { Player p = (Player)obj; Players.Remove(p); fullList.Remove(p); await service.RemovePlayer(p); });//מחיקת התלמיד מהרשימה
+
             LoadPlayersCommand = new Command(async () => await LoadPlayers());
-            
-            
+
+
             FilterCommand = new Command(() =>
             {
                 try
@@ -66,25 +65,46 @@ namespace MyTriviaApp.ViewModels
                 catch (Exception ex) { Console.WriteLine(ex.Message); }
 
             }, () => fullList != null && fullList.Count > 0);
+
             ClearFilterCommand = new Command(async () => { await LoadPlayers(); }, () => fullList != null && fullList.Count > 0);
 
-            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         }
+        private async Task RemovePlayer(Player p)
+        {
+            Players.Remove(p); fullList.Remove(p);
+            await service.RemovePlayer(p);
+        }
+
 
         private async Task LoadPlayers()
         {
             IsRefreshing = true;
 
-            fullList = await triviaService.GetPlayers(); 
+            fullList = await service.GetPlayers();
             Players.Clear();
             foreach (var player in fullList)
                 Players.Add(player);
-            
+
             ((Command)ClearPlayersCommand).ChangeCanExecute();
             IsRefreshing = false;
         }
 
-        //ריקון רשימת התלמידים המוצגת במסך
+        
         private void ClearPlayers()
         {
             Players.Clear();
@@ -93,7 +113,7 @@ namespace MyTriviaApp.ViewModels
         }
         public List<string> GetAllPlayers()
         {
-            List<Player> players = triviaService.GetPlayers1();
+            List<Player> players = service.GetPlayers1();
             List<string> result = new List<string>();
             foreach (Player player in players)
             {
