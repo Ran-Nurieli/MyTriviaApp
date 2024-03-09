@@ -14,7 +14,7 @@ public partial class UserAdminPage : ContentPage
         UserAdminPageViewModel vm = new UserAdminPageViewModel(service);
         this.BindingContext = vm;
 
-        vm.LoadPlayersCommand.Execute(null);
+        
     }
 
 }

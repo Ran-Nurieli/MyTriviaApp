@@ -30,7 +30,7 @@ namespace MyTriviaApp.ViewModels
         public ICommand LoadPlayersCommand { get; private set; }
       //  public ICommand AddPlayerCommand { get; private set; }
         public ICommand RemovePlayerCommand { get; private set; }
-      //  public ICommand ResetPointsCommand { get; private set; }
+        public ICommand ResetPointsCommand { get; private set; }
         //public ICommand RefreshCommand { get; private set; }
         public ICommand FilterCommand { get; private set; }
         public ICommand ClearFilterCommand { get; private set; }
@@ -45,30 +45,21 @@ namespace MyTriviaApp.ViewModels
             SelectedPlayer = null;
             Players = new ObservableCollection<Player>();
 
+            ClearPlayersCommand = new Command(ClearPlayers);
 
-            RemovePlayerCommand = new Command(async (object obj) => { Player p = (Player)obj; Players.Remove(p); fullList.Remove(p); await service.RemovePlayer(p); });//מחיקת התלמיד מהרשימה
+
+            RemovePlayerCommand = new Command(async (object obj) => await RemovePlayer((Player)obj));//מחיקת התלמיד מהרשימה
+
+            ResetPointsCommand = new Command(async (object obj) => await ResetPlayerPoints((Player)obj));
 
             LoadPlayersCommand = new Command(async () => await LoadPlayers());
 
 
-            FilterCommand = new Command(() =>
-            {
-                try
-                {
-                    var FilterByRanks = fullList.Where(x => x.Rank == selectedRank).ToList();
-
-                    Players.Clear();
-
-                    foreach (var player in FilterByRanks)
-                        Players.Add(player);
-                }
-                catch (Exception ex) { Console.WriteLine(ex.Message); }
-
-            }, () => fullList != null && fullList.Count > 0);
+            FilterCommand = new Command(FilterPlayers);
 
             ClearFilterCommand = new Command(async () => { await LoadPlayers(); }, () => fullList != null && fullList.Count > 0);
 
-
+            this.LoadPlayersCommand.Execute(null);
 
 
 
@@ -90,6 +81,10 @@ namespace MyTriviaApp.ViewModels
             await service.RemovePlayer(p);
         }
 
+        private async Task ResetPlayerPoints(Player p)
+        {
+            p.Points = 0;
+        }
 
         private async Task LoadPlayers()
         {
@@ -105,6 +100,26 @@ namespace MyTriviaApp.ViewModels
         }
 
         
+        private void FilterPlayers()
+        {
+            if(fullList != null && fullList.Count > 0)
+            {
+                try
+                {
+                    var FilterByRanks = fullList.Where(x => x.Rank == selectedRank).ToList();
+
+                    Players.Clear();
+
+                    foreach (var player in FilterByRanks)
+                        Players.Add(player);
+                }
+                catch (Exception ex) { Console.WriteLine(ex.Message); }
+            }
+
+
+            
+        }
+
         private void ClearPlayers()
         {
             Players.Clear();

@@ -68,6 +68,7 @@ namespace MyTriviaApp.Services
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 90, Password = "12345", Rank = ranks[0] });
             
             //להוסיף עוד שחקן
         }
@@ -102,7 +103,17 @@ namespace MyTriviaApp.Services
             }
         }
 
-
+        public async Task ResetPlayerPoints(Player p)
+        {
+            await Task.Delay(1000);
+            foreach (Player player in players)
+            {
+                if(player == p)
+                {
+                    player.Points = 0;
+                }
+            }
+        }
 
     }
 }
