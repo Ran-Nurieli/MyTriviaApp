@@ -1,48 +1,38 @@
 <?xml version="1.0" encoding="utf-8" ?>
+   
 <ContentPage
     x:Class="MyTriviaApp.Views.UserAdminPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:MyTriviaApp.Models"
     xmlns:vm="clr-namespace:MyTriviaApp.ViewModels"
-    Title="UserAdminPage">
+    Title="UserAdminPage"
+    x:DataType="vm:UserAdminPageViewModel"
+    >
     <VerticalStackLayout>
 
         <Label
             FontSize="Large"
             HorizontalOptions="Center"
             Text="User Management" />
-        <RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+        <!--<RefreshView Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
             <CollectionView x:Name="colView" >
 
             </CollectionView>
-        </RefreshView>
+        </RefreshView>-->
 
-        <HorizontalStackLayout HorizontalOptions="Center">
-            <Picker SelectedItem="{Binding SelectedIndex, Mode=TwoWay}">
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>
-                            Rookie
-                        </x:String>
-                        <x:String>
-                            Master
-                        </x:String>
-                        <x:String>
-                            Admin
-                        </x:String>
-                        <x:String>
-                            All
-                        </x:String>
-                    </x:Array>
+        <HorizontalStackLayout Margin="10" HorizontalOptions="Center">
+            <Picker 
+                Title="Selected Rank"
+                ItemsSource="{Binding Ranks}" 
+                ItemDisplayBinding="{Binding RankName}"
+                SelectedItem="{Binding SelectedRank}"/>
 
-                </Picker.ItemsSource>
-            </Picker>
             <Button Command="{Binding FilterCommand}" Text="Filter" />
-            <Button
+            <!--<Button
                 BackgroundColor="Red"
                 Command="{Binding ClearPointsCommand}"
-                Text="Reset" />
+                Text="Reset" />-->
         </HorizontalStackLayout>
         <ScrollView MaximumHeightRequest="200">
 
@@ -109,7 +99,7 @@
             </StackLayout>
 
         </ScrollView>
-        <HorizontalStackLayout HorizontalOptions="Center">
+        <HorizontalStackLayout Margin="10"  HorizontalOptions="Center">
 
             <Button
                 BackgroundColor="Blue"
@@ -118,20 +108,23 @@
             <Grid>
                 <Entry
                     HorizontalTextAlignment="Center"
-                    Text="Username"
-                    WidthRequest="100" />
+                    Placeholder="Name"
+                    WidthRequest="100"
+                    Text="{Binding PlayerName}"/>
             </Grid>
             <Grid>
                 <Entry
                     HorizontalTextAlignment="Center"
-                    Text="Mail"
-                    WidthRequest="100" />
+                    Placeholder="Mail"
+                    WidthRequest="100" 
+                    Text="{Binding PlayerMail}"/>
             </Grid>
             <Grid>
                 <Entry
                     HorizontalTextAlignment="Center"
-                    Text="Password"
-                    WidthRequest="100" />
+                    Placeholder="Password"
+                    WidthRequest="100" 
+                    Text="{Binding PlayerPassword}"/>
             </Grid>
         </HorizontalStackLayout>
     </VerticalStackLayout>

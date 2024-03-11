@@ -66,9 +66,12 @@ namespace MyTriviaApp.Services
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[2].GetRankId(2), Points = 0, Password = "12345", Rank = ranks[2] });
             players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
-            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 0, Password = "12345", Rank = ranks[0] });
-            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[0].GetRankId(0), Points = 90, Password = "12345", Rank = ranks[0] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[2].GetRankId(2), Points = 90, Password = "12345", Rank = ranks[2] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[1].GetRankId(1), Points = 90, Password = "12345", Rank = ranks[1] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran", RankId = ranks[1].GetRankId(1), Points = 90, Password = "12345", Rank = ranks[1] });
+            players.Add(new Player { Mail="ran@gmail.com", Name = "Ran1", RankId = ranks[2].GetRankId(2), Points = 90, Password = "12345", Rank = ranks[2] });
             
             //להוסיף עוד שחקן
         }
@@ -103,6 +106,11 @@ namespace MyTriviaApp.Services
             }
         }
 
+        public void UpdatePlayer(Player player)
+        {
+            var p = players.Where(x=>x.Name == player.Name).FirstOrDefault();
+            p.Points = player.Points;
+        }
         public async Task ResetPlayerPoints(Player p)
         {
             await Task.Delay(1000);
@@ -113,6 +121,10 @@ namespace MyTriviaApp.Services
                     player.Points = 0;
                 }
             }
+        }
+        public void AddPlayer(Player newPlayer)
+        {
+            players.Add(newPlayer);
         }
 
     }
